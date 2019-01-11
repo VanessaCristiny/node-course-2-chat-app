@@ -19,10 +19,10 @@ io.on('connection', (socket) => {
 
   socket.broadcast.emit('newMessage', generateMessage('Admin', 'New User joined the group'));
 
-  socket.on('createMessage', (data) => {
+  socket.on('createMessage', (data, callback) => {
     console.log('createMessage: ', data);
     io.emit('newMessage', generateMessage(data.from, data.text));
-
+    callback('This is from the server.');
   });
 
   socket.on('disconnect', () => {
